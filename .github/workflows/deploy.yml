@@ -1,0 +1,81 @@
+name: Deploy Weather Dashboard
+
+
+on:
+
+  push:
+    branches:
+      - main
+
+
+
+permissions:
+
+  contents: read
+
+  pages: write
+
+  id-token: write
+
+
+
+concurrency:
+
+  group: "pages"
+
+  cancel-in-progress: false
+
+
+
+jobs:
+
+
+  deploy:
+
+
+    name: Deploy to GitHub Pages
+
+
+    environment:
+
+      name: github-pages
+
+
+    runs-on: ubuntu-latest
+
+
+
+    steps:
+
+
+      # Checkout repository
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+
+
+      # Configure GitHub Pages
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+
+
+      # Upload website files
+
+      - name: Upload Website
+
+        uses: actions/upload-pages-artifact@v3
+
+        with:
+
+          path: './src'
+
+
+
+      # Deploy
+
+      - name: Deploy Website
+
+        uses: actions/deploy-pages@v4
