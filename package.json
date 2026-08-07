@@ -1,12 +1,13 @@
 {
   "name": "weather-dashboard",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "A weather dashboard with live forecasts, map view, and voice search.",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node weather.js",
-    "lint": "echo \"Linting skipped\" && exit 0",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "lint": "eslint . --ext .js",
     "build": "echo \"No build step\" && exit 0"
   },
   "keywords": [],
@@ -15,6 +16,10 @@
   "type": "commonjs",
   "dependencies": {
     "axios": "^1.18.1",
+    "dotenv": "^16.4.5",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
   }
 }
