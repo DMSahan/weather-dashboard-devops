@@ -4,11 +4,13 @@
   "description": "",
   "main": "weather.js",
   "type": "commonjs",
-  "scripts": {
-    "build": "echo next build",
-    "lint": "eslint .",
-    "test": "jest --passWithNoTests"
-  },
+ "scripts": {
+  "start": "node weather.js",
+  "dev": "nodemon weather.js",
+  "build": "echo next build",
+  "lint": "eslint .",
+  "test": "jest --passWithNoTests"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DMSahan/weather-dashboard-devops.git"
@@ -24,6 +26,8 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "jest": "^30.4.2",
-    "prettier": "^3.9.6"
+    "prettier": "^3.9.6",
+    "axios": "^1.18.1",
+    "express": "^5.2.1"
   }
 }
