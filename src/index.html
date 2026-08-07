@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body class="dark-theme">
+
+  <div class="dashboard">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="location-display">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          <span id="current-location">Detecting location...</span>
+        </div>
+      </div>
+
+      <!-- Search Box -->
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input type="text" id="city-search" placeholder="Search city..." autocomplete="off">
+        <button id="clear-btn" class="clear-btn" aria-label="Clear search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <button id="mic-btn" class="mic-btn" aria-label="Voice search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M12 1C10.34 1 9 2.34 9 4v6c0 1.66 1.34 3 3 3s3-1.34 3-3V4c0-1.66-1.34-3-3-3z"/>
+            <path d="M19 10v2c0 3.87-3.13 7-7 7s-7-3.13-7-7v-2"/>
+            <path d="M12 19v4"/>
+          </svg>
+        </button>
+        <div id="search-suggestions" class="suggestions-dropdown"></div>
+      </div>
+
+      <div class="nav-right">
+        <div class="theme-toggle">
+          <button class="theme-btn" id="btn-light" aria-label="Light mode">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </button>
+          <button class="theme-btn active" id="btn-dark" aria-label="Dark mode">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Location Permission Message -->
+    <div id="location-message" class="location-message" style="display:none;">
+      <span>📍 Location access is required for live weather updates.</span>
+      <button id="open-location-settings">Open Location Settings</button>
+      <button id="dismiss-location-msg">Dismiss</button>
+    </div>
+
+    <!-- Main Dashboard Grid -->
+    <main class="grid-container">
+      <section class="left-column">
+        <div class="forecast-section">
+          <div class="forecast-header">
+            <div class="tabs">
+              <span class="tab" data-period="today">Today</span>
+              <span class="tab" data-period="tomorrow">Tomorrow</span>
+              <span class="tab active" data-period="7days">Next 7 days</span>
+            </div>
+          </div>
+
+          <div id="forecast-wrapper" class="smooth-transition">
+            <div class="forecast-grid" id="forecast-grid">
+              <!-- JS Injected Cards -->
+            </div>
+          </div>
+        </div>
+
+        <div class="map-section">
+          <h2 class="section-title">Global map</h2>
+          <div class="map-container">
+            <div id="map"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="right-column">
+        <div class="widget-box" id="chart-widget-box">
+          <div class="widget-header">
+            <span class="widget-title" id="chart-title">Chance of rain</span>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-y-axis">
+              <span>High</span>
+              <span>Med</span>
+              <span>Low</span>
+            </div>
+            <div class="chart-bars-wrapper">
+              <div class="chart-lines">
+                <div class="chart-line"></div>
+                <div class="chart-line"></div>
+                <div class="chart-line"></div>
+              </div>
+              <div class="chart-bars" id="chart-bars">
+                <!-- Dynamic Bars -->
+              </div>
+              <div class="chart-x-axis" id="chart-x-axis">
+                <!-- Dynamic Time Labels -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-box city-widget">
+          <div class="widget-header">
+            <span class="widget-title">Other large cities</span>
+          </div>
+          <div class="city-list-wrapper">
+            <div class="city-list smooth-transition" id="city-list">
+              <!-- Dynamic Cities List -->
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
