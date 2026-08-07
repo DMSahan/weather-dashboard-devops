@@ -24,7 +24,6 @@ backend API, and a working CI/CD pipeline — and deploy it to production.
 
 - HTML5 / CSS3 / JavaScript (vanilla)
 - Leaflet.js (interactive map)
-- Node.js + Express (local development server)
 - OpenWeatherMap API (weather data)
 - GitHub Actions (CI/CD)
 - Vercel (deployment platform, serverless functions)
