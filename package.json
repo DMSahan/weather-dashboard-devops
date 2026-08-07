@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node weather.js",
-    "lint": "echo \"Linting skipped\" && exit 0"
+    "lint": "echo \"Linting skipped\" && exit 0",
+    "build": "echo \"No build step\" && exit 0"
   },
   "keywords": [],
   "author": "",
