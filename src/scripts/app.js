@@ -1,11 +1,10 @@
-/* global L */
 let map;
 let currentCity = "Kottawa";
 let mapMarkers = [];
 let weatherDataCache = null;
 let currentPeriod = "7days";
 let debounceTimer;
-
+let isLocationDenied = false;
 let isListening = false;
 let recognition = null;
 
@@ -38,7 +37,7 @@ function requestLocationAndFetch() {
       },
       (err) => {
         console.warn("Geolocation denied:", err);
-        
+        isLocationDenied = true;
         showLocationMessage();
         document.getElementById("current-location").innerText = "Kottawa, LK";
         fetchWeatherData("Kottawa");
