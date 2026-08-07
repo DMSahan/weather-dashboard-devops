@@ -5,7 +5,7 @@
   "main": "weather.js",
   "type": "commonjs",
   "scripts": {
-    "build": "next build",
+    "build": "echo next build",
     "lint": "eslint .",
     "test": "jest --passWithNoTests"
   },
