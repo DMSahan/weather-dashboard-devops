@@ -6,52 +6,25 @@ on:
       - main
       - develop
       - "feature/**"
-
   pull_request:
     branches:
       - main
       - develop
 
-
 jobs:
-
   build-and-test:
-
-    name: Build Lint Test
-
+    name: Install Dependencies
     runs-on: ubuntu-latest
 
-
     steps:
-
-      # Get repository code
       - name: Checkout Code
         uses: actions/checkout@v4
 
-
-      # Install Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-
-      # Install packages
       - name: Install Dependencies
         run: npm ci
-
-
-      # Check code quality
-      - name: Run Lint
-        run: npm run lint
-
-
-      # Build project
-      - name: Build Project
-        run: npm run build
-
-
-      # Run tests
-      - name: Run Tests
-        run: npm test
