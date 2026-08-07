@@ -2,31 +2,16 @@
   "name": "weather-dashboard",
   "version": "1.0.0",
   "description": "",
-  "main": "weather.js",
-  "type": "commonjs",
- "scripts": {
-  "start": "node weather.js",
-  "dev": "nodemon weather.js",
-  "build": "echo next build",
-  "lint": "eslint .",
-  "test": "jest --passWithNoTests"
-},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DMSahan/weather-dashboard-devops.git"
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node weather.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DMSahan/weather-dashboard-devops/issues"
-  },
-  "homepage": "https://github.com/DMSahan/weather-dashboard-devops#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "eslint": "^8.57.0",
-    "jest": "^30.4.2",
-    "prettier": "^3.9.6",
+  "type": "commonjs",
+  "dependencies": {
     "axios": "^1.18.1",
     "express": "^5.2.1"
   }

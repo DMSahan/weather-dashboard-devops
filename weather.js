@@ -1,13 +1,10 @@
-require('dotenv').config();
-
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
-const API_KEY = process.env.API_KEY;
+const API_KEY = "3ff100e95f26420e499bb074351d42a8";
 
 app.use(express.static(path.join(__dirname, 'src')));
 
@@ -38,7 +35,7 @@ app.get('/api/weather', async (req, res) => {
     const currentRes = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
     );
-    const { coord, sys, name } = currentRes.data;
+    const { coord, sys, main, wind, name } = currentRes.data;
 
     const forecastRes = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
@@ -131,7 +128,6 @@ app.get('/api/weather', async (req, res) => {
   }
 });
 
-console.log("Weather.js loaded");
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
