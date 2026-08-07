@@ -1,2 +1,2 @@
-API_KEY=3ff100e95f26420e499bb074351d42a8
+OPENWEATHER_API_KEY=your_openweather_api_key_here
 PORT=3000
